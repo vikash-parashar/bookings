@@ -1,0 +1,8 @@
+github.com/alexedwards/scs/v2 v2.5.1 h1:EhAz3Kb3OSQzD8T+Ub23fKsiuvE0GzbF5Lgn0uTwM3Y=
+github.com/alexedwards/scs/v2 v2.5.1/go.mod h1:ToaROZxyKukJKT/xLcVQAChi5k6+Pn1Gvmdl7h3RRj8=
+github.com/go-chi/chi v1.5.4 h1:QHdzF2szwjqVV4wmByUnTcsbIg7UGaQ0tPF2t5GcAIs=
+github.com/go-chi/chi v1.5.4/go.mod h1:uaf8YgoFazUOkPBG7fxPftUylNumIev9awIWOENIuEg=
+github.com/justinas/nosurf v1.1.1 h1:92Aw44hjSK4MxJeMSyDa7jwuI9GR2J/JCQiaKvXXSlk=
+github.com/justinas/nosurf v1.1.1/go.mod h1:ALpWdSbuNGy2lZWtyXdjkYv4edL23oSEgfBT1gPJ5BQ=
+github.com/vikash-parashar/myapp v0.0.0-20230906061714-e4ea2c54a808 h1:wzIRvNM6aNuEu4ikOnFuriX50Uv5DHNBKL2BUMK/h1M=
+github.com/vikash-parashar/myapp v0.0.0-20230906061714-e4ea2c54a808/go.mod h1:iD0J0KB2c28zxnXjMKswdYfpU1u7NQVPM1ivc0s/3TY=
