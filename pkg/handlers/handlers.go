@@ -42,17 +42,22 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 }
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, "generals", &models.TemplateData{StringMap: stringMap})
 }
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, "majors", &models.TemplateData{StringMap: stringMap})
 }
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, "search-availability", &models.TemplateData{StringMap: stringMap})
 }
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, "contact", &models.TemplateData{StringMap: stringMap})
+}
+
+func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	render.RenderTemplate(w, "make-reservation", &models.TemplateData{StringMap: stringMap})
 }
