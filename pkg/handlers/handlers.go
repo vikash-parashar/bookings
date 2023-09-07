@@ -37,9 +37,22 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	stringmap := make(map[string]string)
-	remoteIP := m.App.SessionManager.GetString(r.Context(), "remote_ip")
-	stringmap["remote_ip"] = remoteIP
-
-	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringmap})
+	stringMap := make(map[string]string)
+	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+}
+func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+}
+func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+}
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+}
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	stringMap := make(map[string]string)
+	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
 }
