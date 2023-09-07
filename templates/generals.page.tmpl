@@ -76,8 +76,11 @@
             msg: html,
             callback: function(result) {
                 console.log("called");
+                let form = document.getElementById("check-availability-form");
+                let formData = new FormData(form)
+                formData.append("csrf_token","{{.CSRFToken}}")
 
-                fetch('/search-availability-json')
+                fetch('/search-availability-json',)
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
