@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/vikash-parashar/bookings/pkg/config"
@@ -33,31 +34,36 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
 	m.App.SessionManager.Put(r.Context(), "remote_ip", remoteIP)
 
-	render.RenderTemplate(w, "home", &models.TemplateData{})
+	render.RenderTemplate(w, r, "home", &models.TemplateData{})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "about", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, r, "about", &models.TemplateData{StringMap: stringMap})
 }
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "generals", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, r, "generals", &models.TemplateData{StringMap: stringMap})
 }
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "majors", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, r, "majors", &models.TemplateData{StringMap: stringMap})
 }
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "search-availability", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, r, "search-availability", &models.TemplateData{StringMap: stringMap})
+}
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+	start := r.Form.Get("start")
+	end := r.Form.Get("end")
+	w.Write([]byte(fmt.Sprintf("%s,%s", start, end)))
 }
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "contact", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, r, "contact", &models.TemplateData{StringMap: stringMap})
 }
 
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	stringMap := make(map[string]string)
-	render.RenderTemplate(w, "make-reservation", &models.TemplateData{StringMap: stringMap})
+	render.RenderTemplate(w, r, "make-reservation", &models.TemplateData{StringMap: stringMap})
 }
