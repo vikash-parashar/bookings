@@ -1,5 +1,7 @@
 package models
 
+import "github.com/vikash-parashar/bookings/internal/forms"
+
 // Customized TemplateData To Send Data Into Templates
 type TemplateData struct {
 	StringMap map[string]string
@@ -10,4 +12,5 @@ type TemplateData struct {
 	Flash     string
 	Warning   string
 	Error     string
+	Form      *forms.Form
 }

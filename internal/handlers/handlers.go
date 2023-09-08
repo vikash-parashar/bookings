@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/vikash-parashar/bookings/internal/config"
+	"github.com/vikash-parashar/bookings/internal/forms"
 	"github.com/vikash-parashar/bookings/internal/models"
 	"github.com/vikash-parashar/bookings/internal/render"
 )
@@ -101,6 +102,42 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the search Reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	stringMap := make(map[string]string)
-	render.RenderTemplate(w, r, "make-reservation", &models.TemplateData{StringMap: stringMap})
+	var emptyReservation models.Reservation
+	data := make(map[string]any)
+	data["reservation"] = emptyReservation
+
+	render.RenderTemplate(w, r, "make-reservation", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation handlers the posting of a  Reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("first_name"),
+		LastName:  r.Form.Get("last_name"),
+		Email:     r.Form.Get("email"),
+		Phone:     r.Form.Get("phone"),
+	}
+	form := forms.New(r.PostForm)
+
+	// form.Has("first_name", r)
+	form.MinLength("first_name", 3, r)
+	form.Required("first_name", "last_name", "email")
+	if !form.Valid() {
+		data := make(map[string]any)
+		data["reservation"] = reservation
+
+		render.RenderTemplate(w, r, "make-reservation", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+	}
+
 }
