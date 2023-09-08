@@ -4,6 +4,7 @@ import (
 	"encoding/gob"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
@@ -36,9 +37,18 @@ func main() {
 	}
 }
 
+var InfoLog *log.Logger
+var ErrorLog *log.Logger
+
 func Run() error {
 	// what i am going to put in the sessions
 	gob.Register(models.Reservation{})
+
+	InfoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = InfoLog
+
+	ErrorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = ErrorLog
 
 	// Initialize a new session manager and configure the session lifetime.
 	sessionManager = scs.New()

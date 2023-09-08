@@ -3,11 +3,11 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/vikash-parashar/bookings/internal/config"
 	"github.com/vikash-parashar/bookings/internal/forms"
+	"github.com/vikash-parashar/bookings/internal/helpers"
 	"github.com/vikash-parashar/bookings/internal/models"
 	"github.com/vikash-parashar/bookings/internal/render"
 )
@@ -34,9 +34,6 @@ func NewHandlers(r *Repository) {
 
 // Home renders the search Home page
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-
-	m.App.SessionManager.Put(r.Context(), "remote_ip", remoteIP)
 
 	render.RenderTemplate(w, r, "home", &models.TemplateData{})
 }
@@ -87,7 +84,7 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	out, err := json.MarshalIndent(res, "", "    ")
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -115,7 +112,7 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
 		return
 	}
 
@@ -152,7 +149,7 @@ func (m *Repository) ReservationSummery(w http.ResponseWriter, r *http.Request) 
 	//TODO:
 	reservation, ok := m.App.SessionManager.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
-		log.Println("can not get item from session")
+		m.App.ErrorLog.Println("can not get item from session")
 		m.App.SessionManager.Put(r.Context(), "error", "can not get reservation from session manager")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
