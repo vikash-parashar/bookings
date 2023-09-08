@@ -22,6 +22,21 @@ var sessionManager *scs.SessionManager
 var app config.AppConfig
 
 func main() {
+	err := Run()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	srv := &http.Server{
+		Addr:    port,
+		Handler: routes(&app),
+	}
+	if err := srv.ListenAndServe(); err != nil {
+		log.Println("failed to start application")
+		return
+	}
+}
+
+func Run() error {
 	// what i am going to put in the sessions
 	gob.Register(models.Reservation{})
 
@@ -38,6 +53,7 @@ func main() {
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal(err)
+		return err
 	}
 	app.TemplateCache = tc
 	app.UseCache = true // keep false if you are in developer mod
@@ -45,13 +61,5 @@ func main() {
 	handlers.NewHandlers(repo)
 	render.NewTemplate(&app)
 	log.Println("starting our application on port ", port)
-
-	srv := &http.Server{
-		Addr:    port,
-		Handler: routes(&app),
-	}
-	if err := srv.ListenAndServe(); err != nil {
-		log.Println("failed to start application")
-		return
-	}
+	return nil
 }
