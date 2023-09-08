@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/vikash-parashar/bookings/pkg/config"
-	"github.com/vikash-parashar/bookings/pkg/handlers"
-	"github.com/vikash-parashar/bookings/pkg/render"
+	"github.com/vikash-parashar/bookings/internal/config"
+	"github.com/vikash-parashar/bookings/internal/handlers"
+	"github.com/vikash-parashar/bookings/internal/render"
 )
 
 const (

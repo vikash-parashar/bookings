@@ -1,0 +1,28 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Jost&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Jost:wght@500&display=swap');
+
+body {
+    font-family: 'Jost', sans-serif;
+    background-color: #FFFFDD;
+}
+
+.my-footer {
+    text-align: center;
+    background-color: #183D3D;
+    margin-top: 0.5em;
+    padding: 0.5em;
+    color: rgb(255, 255, 255);
+    font-size: 100%;
+}
+
+.room-image {
+    max-width: 50%;
+}
+
+.notie-container {
+    box-shadow: none;
+}
+
+.datepicker {
+    z-index: 10000;
+}
