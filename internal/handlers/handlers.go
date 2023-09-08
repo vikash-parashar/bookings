@@ -142,4 +142,28 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
+	// getting values of reservation from sessions to display on reservation-summery page
+	m.App.SessionManager.Put(r.Context(), "reservation", reservation)
+	http.Redirect(w, r, "/reservation-summery", http.StatusSeeOther)
+
 }
+
+func (m *Repository) ReservationSummery(w http.ResponseWriter, r *http.Request) {
+	//TODO:
+	reservation, ok := m.App.SessionManager.Get(r.Context(), "reservation").(models.Reservation)
+	if !ok {
+		log.Println("can not get item from session")
+		m.App.SessionManager.Put(r.Context(), "error", "can not get reservation from session manager")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		return
+	}
+	data := make(map[string]any)
+	data["reservation"] = reservation
+	render.RenderTemplate(w, r, "reservation-summery", &models.TemplateData{
+		Form: forms.New(nil),
+		Data: data,
+	})
+	m.App.SessionManager.Remove(r.Context(), "reservation")
+}
+
+//FIXME: do't forget to import the latest templates from git repo by ts

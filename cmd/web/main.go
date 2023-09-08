@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"log"
 	"net/http"
 	"time"
@@ -8,6 +9,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/vikash-parashar/bookings/internal/config"
 	"github.com/vikash-parashar/bookings/internal/handlers"
+	"github.com/vikash-parashar/bookings/internal/models"
 	"github.com/vikash-parashar/bookings/internal/render"
 )
 
@@ -20,6 +22,8 @@ var sessionManager *scs.SessionManager
 var app config.AppConfig
 
 func main() {
+	// what i am going to put in the sessions
+	gob.Register(models.Reservation{})
 
 	// Initialize a new session manager and configure the session lifetime.
 	sessionManager = scs.New()
